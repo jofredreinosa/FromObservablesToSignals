@@ -5,10 +5,8 @@ import {map, Observable} from "rxjs";
 export interface User {
   dob: string;
   country: string;
-  postcode: string;
   userName: string;
   fullName: string;
-  phone: string;
   cellPhone: string;
   email: string;
 }
@@ -28,7 +26,6 @@ export class UsersService {
            dob: user.dob.date,
            country: user.location.country,
            userName: user.login.username,
-           phone: user.phone,
            cellPhone: user.cell,
            email: user.email,
          }
