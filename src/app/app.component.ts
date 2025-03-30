@@ -17,11 +17,13 @@ export class AppComponent implements OnInit {
   users: User[] = [];
 
   ngOnInit(): void {
+    this.loadUsersData();
+  }
+
+  private loadUsersData(): void {
     this.usersService.getUsers().subscribe({
       next: (values) => this.users = values,
       error: (error) => console.error(error)
     });
   }
 }
-
-
