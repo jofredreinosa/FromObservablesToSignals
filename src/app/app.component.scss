@@ -1,0 +1,21 @@
+.container {
+  padding: 20px 40px;
+}
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th, .user-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.user-table th {
+  background-color: #f0f0f0;
+}
+
+.text-center {
+  text-align: center !important;
+}
