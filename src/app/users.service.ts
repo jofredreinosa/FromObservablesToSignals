@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {firstValueFrom, map, Observable} from "rxjs";
 
 export interface User {
   dob: string;
@@ -17,8 +17,8 @@ export interface User {
 export class UsersService {
  private http = inject(HttpClient);
 
- getUsers(): Observable<User[]> {
-   return this.http.get<User[]>('https://randomuser.me/api/?results=10')
+ getUsers(): Promise<User[]> {
+   const users = this.http.get<User[]>('https://randomuser.me/api/?results=10')
      .pipe( map((data: any) => {
        const response: User[] = data.results.map((user: any) => {
          return {
@@ -31,6 +31,8 @@ export class UsersService {
          }
        });
        return response;
-     }))
+     }));
+
+   return firstValueFrom(users);
  }
 }

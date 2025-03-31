@@ -12,7 +12,7 @@
         </tr>
         </thead>
         <tbody>
-            @for (user of users; track user.userName) {
+            @for (user of users(); track user.userName) {
                 <tr>
                     <td>{{ user.fullName }}</td>
                     <td class="text-center">{{ user.dob | date: 'longDate' }}</td>

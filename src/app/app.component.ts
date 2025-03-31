@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {User, UsersService} from "./users.service";
 
@@ -14,16 +14,19 @@ import {User, UsersService} from "./users.service";
 })
 export class AppComponent implements OnInit {
   private usersService = inject(UsersService);
-  users: User[] = [];
+  users = signal<User[]>([]);
 
   ngOnInit(): void {
-    this.loadUsersData();
+    void this.loadUsersData();
   }
 
-  private loadUsersData(): void {
-    this.usersService.getUsers().subscribe({
-      next: (values) => this.users = values,
-      error: (error) => console.error(error)
-    });
+  private async loadUsersData(): Promise<void> {
+    try {
+      const users = await this.usersService.getUsers();
+      this.users.set(users);
+    }
+    catch (error) {
+      console.error(error);
+    }
   }
 }
