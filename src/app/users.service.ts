@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {firstValueFrom, map, Observable} from "rxjs";
+import {firstValueFrom, map} from "rxjs";
 
 export interface User {
   dob: string;
